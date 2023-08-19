@@ -14,7 +14,9 @@ check() {
 
   service::config_set SERVICE_UMAMI_SECRET_KEY text "Secret Key" $(os::random_string 8)
 
-  log::info "Database Engine: PostgreSQL"
+  if [ -z "$SERVICE_UMAMI_DATABASE_HOST" ]; then
+    log::info "Database Engine: PostgreSQL"
+  fi
 
   service::config_set SERVICE_UMAMI_DATABASE_HOST text "Database Host"
   service::config_set SERVICE_UMAMI_DATABASE_PORT text "Database Port" 5432
