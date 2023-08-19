@@ -19,7 +19,7 @@ check() {
   service::config_set SERVICE_UMAMI_DATABASE_HOST text "Database Host"
   service::config_set SERVICE_UMAMI_DATABASE_PORT text "Database Port" 5432
   service::config_set SERVICE_UMAMI_DATABASE_USERNAME text "Database Username" "umami"
-  service::config_set SERVICE_UMAMI_DATABASE_PASSWORD password "Database Password" $(os::random_string 16)
+  service::config_set SERVICE_UMAMI_DATABASE_PASSWORD text "Database Password" $(os::random_string 16)
   service::config_set SERVICE_UMAMI_DATABASE_NAME text "Database Name" "umami"
 }
 
