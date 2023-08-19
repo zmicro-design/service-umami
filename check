@@ -1,0 +1,26 @@
+#!/bin/bash
+
+service::config_set() {
+  config::check_or_set $1 $2 $SERVICE_CONFIG "${@:3}"
+}
+
+check() {
+  if [ "$DEBUG" = "true" ]; then
+    log::info "[DEBUG][service]: $SERVICE_CONFIG"
+    cat $SERVICE_CONFIG
+  fi
+
+  # service::config_set SERVICE_UMAMI_PORT text "Port" 3000
+
+  service::config_set SERVICE_UMAMI_SECRET_KEY text "Secret Key" $(os::random_string 8)
+
+  log::info "Database Engine: PostgreSQL"
+
+  service::config_set SERVICE_UMAMI_DATABASE_HOST text "Database Host"
+  service::config_set SERVICE_UMAMI_DATABASE_PORT text "Database Port" 5432
+  service::config_set SERVICE_UMAMI_DATABASE_USERNAME text "Database Username" "umami"
+  service::config_set SERVICE_UMAMI_DATABASE_PASSWORD password "Database Password" $(os::random_string 16)
+  service::config_set SERVICE_UMAMI_DATABASE_NAME text "Database Name" "umami"
+}
+
+check $@

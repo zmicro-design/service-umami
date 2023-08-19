@@ -1,0 +1,14 @@
+services:
+  umami:
+    restart: always
+    image: whatwewant/umami:${SERVICE_UMAMI_IMAGE_VERSION}
+    environment:
+      # PORT: $SERVICE_UMAMI_PORT
+      DATABASE_URL: postgresql://${SERVICE_UMAMI_DATABASE_USERNAME}:${SERVICE_UMAMI_DATABASE_PASSWORD}@${SERVICE_UMAMI_DATABASE_HOST}:${SERVICE_UMAMI_DATABASE_PORT}/${SERVICE_UMAMI_DATABASE_NAME}
+      DATABASE_TYPE: postgresql
+      APP_SECRET: ${SERVICE_UMAMI_SECRET_KEY}
+      
+networks:
+  default:
+    external: true
+    name: compose-ingress
